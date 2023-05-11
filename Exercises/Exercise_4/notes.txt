@@ -1,0 +1,30 @@
+compute the divergence of that gradient field 
+in order to setup and solve a Poisson equation. 
+
+compute_divergence_on_trimesh 
+input  spot_mesh
+vector field from compute_gradient_of_distance_field as vec. 
+
+It returns a numpy array with a scalar per vertex. 
+
+You can use mesh.vertices() to iterate over all vertices of the mesh.
+
+Use mesh.voh(vh) to iterate over all outgoing halfedges for a vertex handle vh
+
+. 
+You can get the corresponding (unique) face handle for a halfedge handle hh with mesh.face_handle(hh).
+
+
+ 
+To jump to the next halfedge handle from a halfedge handle hh in a face use mesh.next_halfedge_handle(hh). 
+
+The vertex handle that a halfedge hh points to can be looked up with mesh.to_vertex_handle(hh). 
+
+The cotanget for two vectors  𝑣1
+  and  𝑣2
+  can be computed as  𝑣𝑇1𝑣2||𝑣1×𝑣2||
+
+compute_distance_field 
+input the weak Laplace Beltrami Operator and the divergence field. 
+
+It returns the distance field (a numpy array with scalars per vertex). Use lsqr to solve the Poisson equation since it is over-determined. Your solution should look like this. Note that the distance field can have negative values, as the solution of the Poisson equation is invariant to a constant offset.
