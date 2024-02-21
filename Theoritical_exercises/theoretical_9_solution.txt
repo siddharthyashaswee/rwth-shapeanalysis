@@ -1,0 +1,19 @@
+1)
+consider an ambiguous case:
+net("A") --> B for ABBA or C for ACDC
+both equally likely
+if we  train with L2 Loss on some output vector, in this case, this would converge to 0.5 * B + 0.5 * C;
+that is not meaningful. instead: train on probabilities of those, so we end up with 50% A, 50% B
+
+2)
+Attention scales quadratically: many pixels, e.g. an HD image, would mean 2mio attention scores --> much to expensive!
+but: attention is great to capture global context BECAUSE it compares everything with everything, i.e. every pixel with every other
+(ideal: first encode some patches, e.g. put your HD image through an AE to get 32 x 32 patches, THEN attention between those!)
+
+3)
+*typo: slightly LESS noisy version of the image was meant...
+always outputs the noise in the image, i.e. x0 + noise = xt; net(xt) --> noise
+
+counterexample, why this would not be smart:
+x0 + noise * epsilon = x1; x1 + noise' * epsilon = x2
+to train net(x2) = x1 would be ambiguous, we can't know "what noise was first added", i.e. the noising process is random!
